@@ -16,6 +16,11 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, ArcElement, Le
 export default function AnalyticsPage() {
   const { users, bookmarks } = useDashboard();
 
+  // ✅ Prevent render until data is available
+  if (!users || !bookmarks) {
+    return <div className="p-6 text-black">Loading analytics...</div>;
+  }
+
   const departments = ["HR", "Engineering", "Marketing", "Finance"];
   const departmentData = departments.map((dept) => {
     const deptUsers = users.filter((u) => u.department === dept);
@@ -47,18 +52,37 @@ export default function AnalyticsPage() {
     ],
   };
 
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
   return (
     <div className="p-6 space-y-8">
       <h1 className="text-3xl font-bold text-black">Analytics</h1>
 
-      <div className="bg-white p-4 rounded shadow text-black">
+      <div className="bg-white p-4 rounded shadow text-black h-96">
         <h2 className="text-xl font-semibold mb-2">Avg Rating by Department</h2>
-        <Bar data={departmentChart} />
+        <div className="h-full">
+          <Bar data={departmentChart} options={chartOptions} />
+        </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow">
+      <div className="bg-white p-4 rounded shadow h-96">
         <h2 className="text-xl font-semibold mb-2">Bookmark Distribution</h2>
-        <Pie data={bookmarkChart} />
+        <div className="h-full">
+          <Pie data={bookmarkChart} options={chartOptions} />
+        </div>
       </div>
     </div>
   );
