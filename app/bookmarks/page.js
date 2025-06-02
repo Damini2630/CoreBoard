@@ -20,7 +20,7 @@ export default function BookmarksPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-black">Bookmarked Employees</h1>
+      <h1 className="text-3xl font-bold text-black">Bookmarked Employees</h1>
       <div className="grid md:grid-cols-2 gap-4">
         {bookmarkedUsers.map((user) => (
           <div key={user.id} className="border rounded p-4 shadow">
