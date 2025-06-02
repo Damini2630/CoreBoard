@@ -15,7 +15,7 @@ export default function UserCard({ user }) {
   const isPromoted = promoted.includes(user.id);
 
   return (
-    <div className="border p-4 rounded shadow text-black">
+    <div className="border p-4 rounded shadow ">
       <h2 className="font-semibold text-lg">
         {user.firstName} {user.lastName}
       </h2>
