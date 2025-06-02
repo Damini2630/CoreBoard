@@ -15,7 +15,7 @@ export default function UserCard({ user }) {
   const isPromoted = promoted.includes(user.id);
 
   return (
-    <div className="border p-4 rounded shadow ">
+    <div className="border p-4 rounded shadow bg-white">
       <h2 className="font-semibold text-lg text-black">
         {user.firstName} {user.lastName}
       </h2>
@@ -25,7 +25,10 @@ export default function UserCard({ user }) {
       <StarRating rating={user.performance} />
 
       <div className="mt-2 flex gap-4 items-center">
-        <Link href={`/employee/${user.id}`} className="text-blue-500 hover:underline">
+        <Link
+          href={`/employee/${user.id}`}
+          className="text-blue-500 hover:underline"
+        >
           View
         </Link>
 
