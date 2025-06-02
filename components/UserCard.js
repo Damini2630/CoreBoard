@@ -19,8 +19,8 @@ export default function UserCard({ user }) {
       <h2 className="font-semibold text-lg text-black">
         {user.firstName} {user.lastName}
       </h2>
-      <p className="text-gray">{user.email}</p>
-      <p>Age: {user.age}</p>
+      <p className="text-black">{user.email}</p>
+      <p className="text-black">Age: {user.age}</p>
       <p className="text-sm text-gray-600">Dept: {user.department}</p>
       <StarRating rating={user.performance} />
 
