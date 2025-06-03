@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <div className="p-6 space-y-4">
       <Typography
-  variant="h5"
+  variant="h3"
   fontWeight={500}
   color="text.primary"
   sx={{
