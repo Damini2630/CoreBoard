@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 
 // Custom toast utilities
-import { showSuccessToast, showInfoToast } from "../../utils/toast";
+import { showSuccessToast, showInfoToast } from "../../components/Toast";
 
 export default function BookmarksPage() {
   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
