@@ -11,20 +11,18 @@ export default function HomePage() {
   return (
     <div className="p-6 space-y-4">
       <Typography
-  variant="h3"
-  fontWeight="bold"
+  variant="h5"
+  fontWeight={500}
+  color="text.primary"
   sx={{
-    color: "primary.main",
-    textTransform: "uppercase",
-    letterSpacing: 1.5,
     mb: 2,
-    borderBottom: "3px solid",
-    borderColor: "primary.light",
-    display: "inline-block",
+    fontFamily: '"Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    letterSpacing: 0.5,
   }}
 >
   HR Performance Dashboard
 </Typography>
+
 
       <SearchFilter />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
