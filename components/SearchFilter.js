@@ -44,7 +44,7 @@ export default function SearchFilter() {
 
         {/* Departments */}
         <Grid item xs={12} md={4}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom color="text.primary">
             Departments:
           </Typography>
           <ToggleButtonGroup
@@ -64,7 +64,7 @@ export default function SearchFilter() {
 
         {/* Ratings */}
         <Grid item xs={12} md={4}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom color="text.primary">
             Ratings:
           </Typography>
           <ToggleButtonGroup
