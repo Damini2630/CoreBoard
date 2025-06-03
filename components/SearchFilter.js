@@ -7,7 +7,7 @@ import {
   Typography,
   ToggleButton,
   ToggleButtonGroup,
-  Stack,
+  Grid,
 } from "@mui/material";
 
 const departments = ["HR", "Engineering", "Marketing", "Finance"];
@@ -30,18 +30,20 @@ export default function SearchFilter() {
   };
 
   return (
-    <Box my={2} sx={{ overflowX: "auto" }}>
-      <Stack direction="row" spacing={4} alignItems="center" flexWrap="wrap">
-        {/* Search Input */}
-        <TextField
-          label="Search"
-          variant="outlined"
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{ minWidth: 250 }}
-        />
+    <Box my={3} width="100%">
+      <Grid container spacing={3} alignItems="flex-start">
+        {/* Search */}
+        <Grid item xs={12} md={4}>
+          <TextField
+            label="Search"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Grid>
 
         {/* Departments */}
-        <Box>
+        <Grid item xs={12} md={4}>
           <Typography variant="subtitle2" gutterBottom>
             Departments:
           </Typography>
@@ -50,17 +52,18 @@ export default function SearchFilter() {
             onChange={handleDepartmentChange}
             aria-label="department filter"
             size="small"
+            fullWidth
           >
             {departments.map((dept) => (
-              <ToggleButton key={dept} value={dept} aria-label={dept}>
+              <ToggleButton key={dept} value={dept}>
                 {dept}
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
-        </Box>
+        </Grid>
 
         {/* Ratings */}
-        <Box>
+        <Grid item xs={12} md={4}>
           <Typography variant="subtitle2" gutterBottom>
             Ratings:
           </Typography>
@@ -69,15 +72,16 @@ export default function SearchFilter() {
             onChange={handleRatingChange}
             aria-label="rating filter"
             size="small"
+            fullWidth
           >
             {ratings.map((rating) => (
-              <ToggleButton key={rating} value={rating} aria-label={`rating-${rating}`}>
+              <ToggleButton key={rating} value={rating}>
                 {rating}⭐
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
-        </Box>
-      </Stack>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
