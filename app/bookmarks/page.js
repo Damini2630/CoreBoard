@@ -15,6 +15,10 @@ import {
   Stack,
 } from "@mui/material";
 
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function BookmarksPage() {
   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
 
@@ -22,11 +26,21 @@ export default function BookmarksPage() {
     const confirmed = window.confirm(`Are you sure you want to promote ${name}?`);
     if (confirmed) {
       promoteEmployee(id);
+      toast.success(`${name} has been promoted!`, {
+        position: "top-right",
+        autoClose: 3000,
+        pauseOnHover: true,
+      });
     }
   };
 
-  const handleUnbookmark = (id) => {
+  const handleUnbookmark = (id, name) => {
     toggleBookmark(id);
+    toast.info(`${name} removed from bookmarks.`, {
+      position: "top-right",
+      autoClose: 3000,
+      pauseOnHover: true,
+    });
   };
 
   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
@@ -43,6 +57,7 @@ export default function BookmarksPage() {
 
   return (
     <Box p={4}>
+      <ToastContainer />
       <Typography variant="h4" fontWeight="bold" gutterBottom color="text.primary">
         Bookmarked Employees
       </Typography>
@@ -71,7 +86,9 @@ export default function BookmarksPage() {
                   <Button
                     size="small"
                     color="error"
-                    onClick={() => handleUnbookmark(user.id)}
+                    onClick={() =>
+                      handleUnbookmark(user.id, `${user.firstName} ${user.lastName}`)
+                    }
                   >
                     Remove Bookmark
                   </Button>
@@ -79,7 +96,9 @@ export default function BookmarksPage() {
                   <Button
                     size="small"
                     color="success"
-                    onClick={() => handlePromote(user.id, `${user.firstName} ${user.lastName}`)}
+                    onClick={() =>
+                      handlePromote(user.id, `${user.firstName} ${user.lastName}`)
+                    }
                   >
                     {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
                   </Button>
