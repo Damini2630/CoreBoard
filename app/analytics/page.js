@@ -148,7 +148,7 @@ export default function AnalyticsPage() {
       {
         label: "Promotion Stats",
         data: [promoted.length, users.length - promoted.length],
-        backgroundColor: ["#6366f1", "#d1d5db"], // Indigo and Gray
+        backgroundColor: ["#6366f1", "#e5e7eb"],
       },
     ],
   };
@@ -179,15 +179,15 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow h-96 text-black">
+      <div className="bg-white p-4 rounded shadow h-96">
         <h2 className="text-xl font-semibold mb-2">Bookmark Distribution</h2>
         <div className="h-full">
           <Pie data={bookmarkChart} options={chartOptions} />
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow h-96 text-black">
-        <h2 className="text-xl font-semibold mb-2">Promoted Employees</h2>
+      <div className="bg-white p-4 rounded shadow h-96">
+        <h2 className="text-xl font-semibold mb-2">Promotion Distribution</h2>
         <div className="h-full">
           <Pie data={promotedChart} options={chartOptions} />
         </div>
@@ -195,4 +195,3 @@ export default function AnalyticsPage() {
     </div>
   );
 }
-
