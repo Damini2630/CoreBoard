@@ -1,57 +1,24 @@
-// "use client";
-// import { useDashboard } from "../../context/DashboardContext";
-// import React, { useState } from "react";
-// import Toast from "../../components/Toast";
-// import Link from "next/link";
 
-// export default function BookmarksPage() {
-//   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
-//   const [showToast, setShowToast] = useState(false);
-//   const handlePromote = (id) => {
-//     promoteEmployee(id);
-//     setShowToast(true);
-//   };
-
-//   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
-
-//   if (bookmarkedUsers.length === 0) {
-//     return <div className="p-6 text-gray-600">No bookmarks found.</div>;
-//   }
-
-//   return (
-//     <div className="p-6">
-//       <h1 className="text-3xl font-bold text-black">Bookmarked Employees</h1>
-//       <div className="grid md:grid-cols-2 gap-4">
-//         {bookmarkedUsers.map((user) => (
-//           <div key={user.id} className="border rounded p-4 shadow">
-//             <h2 className="text-lg font-semibold text-black">{user.firstName} {user.lastName}</h2>
-//             <p>{user.email} | Dept: {user.department}</p>
-
-//             <div className="flex gap-2 mt-3">
-//               <Link href={/employee/${user.id}} className="text-blue-500 hover:underline">View</Link>
-//               <button onClick={() => toggleBookmark(user.id)} className="text-red-500 hover:underline">
-//                 Remove Bookmark
-//               </button>
-//               <Toast message="Employee Promoted!" show={showToast} />
-//               <button onClick={() => handlePromote(user.id)} className="text-green-600 hover:underline">
-//                 {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
-//               </button>
-//               <button className="text-indigo-500 hover:underline">Assign to Project</button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
 
 
 "use client";
-import { useDashboard } from "../../context/DashboardContext";
 import React from "react";
 import Link from "next/link";
+import { useDashboard } from "../../context/DashboardContext";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+
+// MUI Components
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Grid,
+  Stack,
+} from "@mui/material";
 
 export default function BookmarksPage() {
   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
@@ -80,43 +47,70 @@ export default function BookmarksPage() {
   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
 
   if (bookmarkedUsers.length === 0) {
-    return <div className="p-6 text-gray-600">No bookmarks found.</div>;
+    return (
+      <Box p={4}>
+        <Typography variant="body1" color="text.secondary">
+          No bookmarks found.
+        </Typography>
+      </Box>
+    );
   }
 
   return (
-    <div className="p-6">
+    <Box p={4}>
       <ToastContainer />
-      <h1 className="text-3xl font-bold text-black mb-4">Bookmarked Employees</h1>
-      <div className="grid md:grid-cols-2 gap-4">
-        {bookmarkedUsers.map((user) => (
-          <div key={user.id} className="border rounded p-4 shadow">
-            <h2 className="text-lg font-semibold text-black">
-              {user.firstName} {user.lastName}
-            </h2>
-            <p className="text-black">{user.email} | Dept: {user.department}</p>
+      <Typography variant="h4" fontWeight="bold" gutterBottom>
+        Bookmarked Employees
+      </Typography>
 
-            <div className="flex gap-2 mt-3">
-              <Link href={`/employee/${user.id}`} className="text-blue-500 hover:underline">
-                View
-              </Link>
-              <button
-                onClick={() => handleUnbookmark(user.id, `${user.firstName} ${user.lastName}`)}
-                className="text-red-500 hover:underline"
-              >
-                Remove Bookmark
-              </button>
-              <button
-                onClick={() => handlePromote(user.id, `${user.firstName} ${user.lastName}`)}
-                className="text-green-600 hover:underline"
-              >
-                {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
-              </button>
-              <button className="text-indigo-500 hover:underline">Assign to Project</button>
-            </div>
-          </div>
+      <Grid container spacing={3}>
+        {bookmarkedUsers.map((user) => (
+          <Grid item xs={12} md={6} key={user.id}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography variant="h6" color="text.primary">
+                  {user.firstName} {user.lastName}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {user.email} | Dept: {user.department}
+                </Typography>
+              </CardContent>
+
+              <CardActions>
+                <Stack direction="row" spacing={1}>
+                  <Link href={`/employee/${user.id}`} passHref legacyBehavior>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                  </Link>
+
+                  <Button
+                    size="small"
+                    color="error"
+                    onClick={() => handleUnbookmark(user.id, `${user.firstName} ${user.lastName}`)}
+                  >
+                    Remove Bookmark
+                  </Button>
+
+                  <Button
+                    size="small"
+                    color="success"
+                    onClick={() => handlePromote(user.id, `${user.firstName} ${user.lastName}`)}
+                  >
+                    {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
+                  </Button>
+
+                  <Button size="small" color="secondary">
+                    Assign to Project
+                  </Button>
+                </Stack>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }
+
 
