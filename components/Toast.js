@@ -1,22 +1,23 @@
-"use client";
-import { useState, useEffect } from "react";
+// utils/toast.js
+import { toast } from "react-toastify";
 
-export default function Toast({ message, show, duration = 2000 }) {
-  const [visible, setVisible] = useState(show);
+export const showSuccessToast = (message) =>
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: true,
+  });
 
-  useEffect(() => {
-    if (show) {
-      setVisible(true);
-      const timer = setTimeout(() => setVisible(false), duration);
-      return () => clearTimeout(timer);
-    }
-  }, [show, duration]);
+export const showInfoToast = (message) =>
+  toast.info(message, {
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: true,
+  });
 
-  if (!visible) return null;
-
-  return (
-    <div className="fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50">
-      {message}
-    </div>
-  );
-}
+export const showErrorToast = (message) =>
+  toast.error(message, {
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: true,
+  });
