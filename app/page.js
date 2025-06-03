@@ -27,6 +27,7 @@ export default function HomePage() {
     department: "",
     phone: "",
     address: "",
+    bio: "",
   });
 
   const handleChange = (e) => {
@@ -44,6 +45,7 @@ export default function HomePage() {
       department: "",
       phone: "",
       address: "",
+      bio:"",
     });
   };
 
@@ -61,7 +63,7 @@ export default function HomePage() {
         >
           HR Performance Dashboard
         </Typography>
-        <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+        <Button variant="contained" color="dark blue" onClick={() => setOpen(true)}>
           + Add Employee
         </Button>
       </Box>
@@ -79,7 +81,7 @@ export default function HomePage() {
         <DialogTitle>Add New Employee</DialogTitle>
         <DialogContent dividers>
           <Grid container spacing={2} mt={1}>
-            {["firstName", "lastName", "email", "age", "department", "phone", "address"].map(
+            {["firstName", "lastName", "email", "age", "department", "phone", "address", "bio"].map(
               (field) => (
                 <Grid item xs={12} sm={field === "address" ? 12 : 6} key={field}>
                   <TextField
