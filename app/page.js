@@ -14,8 +14,6 @@ import {
   DialogActions,
   TextField,
 } from "@mui/material";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function HomePage() {
   const { filteredUsers, addEmployee } = useDashboard();
@@ -37,7 +35,6 @@ export default function HomePage() {
 
   const handleAdd = () => {
     addEmployee(form);
-    toast.success("Employee added successfully!");
     setOpen(false);
     setForm({
       firstName: "",
@@ -52,7 +49,6 @@ export default function HomePage() {
 
   return (
     <div className="p-6 space-y-6">
-      <ToastContainer />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography
           variant="h4"
