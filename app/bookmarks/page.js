@@ -100,9 +100,6 @@ export default function BookmarksPage() {
                     {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
                   </Button>
 
-                  /* <Button size="small" color="secondary">
-                  //   Assign to Project
-                   </Button>  */
                 </Stack>
               </CardActions>
             </Card>
