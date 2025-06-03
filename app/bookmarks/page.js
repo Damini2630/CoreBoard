@@ -51,7 +51,7 @@ export default function BookmarksPage() {
   return (
     <Box p={4}>
       <ToastContainer />
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
+      <Typography variant="h4" fontWeight="bold" gutterBottom color="text.primary">
         Bookmarked Employees
       </Typography>
 
