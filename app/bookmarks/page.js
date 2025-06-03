@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useDashboard } from "../../context/DashboardContext";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // MUI Components
@@ -17,9 +17,6 @@ import {
   Stack,
 } from "@mui/material";
 
-// Custom toast utilities
-import { showSuccessToast, showInfoToast } from "../../components/Toast";
-
 export default function BookmarksPage() {
   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
 
@@ -27,13 +24,19 @@ export default function BookmarksPage() {
     const confirmed = window.confirm(`Are you sure you want to promote ${name}?`);
     if (confirmed) {
       promoteEmployee(id);
-      showSuccessToast(`${name} has been promoted!`);
+      toast.success(`${name} has been promoted!`, {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
   const handleUnbookmark = (id, name) => {
     toggleBookmark(id);
-    showInfoToast(`${name} removed from bookmarks.`);
+    toast.info(`${name} removed from bookmarks.`, {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
@@ -91,7 +94,6 @@ export default function BookmarksPage() {
                   >
                     {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
                   </Button>
-
                 </Stack>
               </CardActions>
             </Card>
