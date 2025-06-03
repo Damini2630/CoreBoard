@@ -1,6 +1,4 @@
-# CoreBoard
-
-# 🧑‍💼 Mini HR Performance Dashboard
+# 🧑‍💼 CoreBoard - The mini HR Performance Dashboard
 
 A modern HR management dashboard built with **Next.js App Router**, **Tailwind CSS**, and **React**, designed for HR managers to track employee performance, manage teams, and view detailed analytics.
 
