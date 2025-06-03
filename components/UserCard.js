@@ -2,6 +2,7 @@
 import Link from "next/link";
 import StarRating from "./StarRating";
 import { useDashboard } from "../context/DashboardContext";
+import { FaBookmark, FaRegBookmark, FaUserTie } from "react-icons/fa"; // Optional icons
 
 export default function UserCard({ user }) {
   const {
@@ -15,7 +16,7 @@ export default function UserCard({ user }) {
   const isPromoted = promoted.includes(user.id);
 
   return (
-    <div className="border p-4 rounded shadow bg-white">
+    <div className="border p-4 rounded shadow bg-white flex flex-col gap-2">
       <h2 className="font-semibold text-lg text-black">
         {user.firstName} {user.lastName}
       </h2>
@@ -24,26 +25,39 @@ export default function UserCard({ user }) {
       <p className="text-sm text-gray-600">Dept: {user.department}</p>
       <StarRating rating={user.performance} />
 
-      <div className="mt-2 flex gap-4 items-center">
+      <div className="mt-3 flex gap-4 items-center text-sm">
         <Link
           href={`/employee/${user.id}`}
-          className="text-blue-500 hover:underline"
+          className="text-blue-600 hover:underline font-medium"
         >
           View
         </Link>
 
         <button
-          className={`hover:underline ${isBookmarked ? "text-yellow-700" : "text-yellow-600"}`}
           onClick={() => toggleBookmark(user.id)}
+          className="flex items-center gap-1 text-yellow-600 hover:underline"
         >
-          {isBookmarked ? "Bookmarked" : "Bookmark"}
+          {isBookmarked ? (
+            <>
+              <FaBookmark className="text-yellow-700" />
+              <span className="text-yellow-700">Bookmarked</span>
+            </>
+          ) : (
+            <>
+              <FaRegBookmark />
+              <span>Bookmark</span>
+            </>
+          )}
         </button>
 
         <button
-          className={`hover:underline ${isPromoted ? "text-green-700" : "text-green-600"}`}
           onClick={() => promoteEmployee(user.id)}
+          className="flex items-center gap-1 text-green-600 hover:underline"
         >
-          {isPromoted ? "Promoted" : "Promote"}
+          <FaUserTie className={isPromoted ? "text-green-700" : ""} />
+          <span className={isPromoted ? "text-green-700 font-medium" : ""}>
+            {isPromoted ? "Promoted" : "Promote"}
+          </span>
         </button>
       </div>
     </div>
