@@ -1,11 +1,8 @@
-
-
-
 "use client";
 import React from "react";
 import Link from "next/link";
 import { useDashboard } from "../../context/DashboardContext";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // MUI Components
@@ -20,6 +17,9 @@ import {
   Stack,
 } from "@mui/material";
 
+// Custom toast utilities
+import { showSuccessToast, showInfoToast } from "../../utils/toast";
+
 export default function BookmarksPage() {
   const { users, bookmarks, toggleBookmark, promoteEmployee, promoted } = useDashboard();
 
@@ -27,21 +27,13 @@ export default function BookmarksPage() {
     const confirmed = window.confirm(`Are you sure you want to promote ${name}?`);
     if (confirmed) {
       promoteEmployee(id);
-      toast.success(`${name} has been promoted!`, {
-        position: "top-right",
-        autoClose: 3000,
-        pauseOnHover: true,
-      });
+      showSuccessToast(`${name} has been promoted!`);
     }
   };
 
   const handleUnbookmark = (id, name) => {
     toggleBookmark(id);
-    toast.info(`${name} removed from bookmarks.`, {
-      position: "top-right",
-      autoClose: 3000,
-      pauseOnHover: true,
-    });
+    showInfoToast(`${name} removed from bookmarks.`);
   };
 
   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
@@ -100,6 +92,9 @@ export default function BookmarksPage() {
                     {promoted.includes(user.id) ? "Promoted ✅" : "Promote"}
                   </Button>
 
+                  <Button size="small" color="secondary">
+                    Assign to Project
+                  </Button>
                 </Stack>
               </CardActions>
             </Card>
@@ -109,5 +104,3 @@ export default function BookmarksPage() {
     </Box>
   );
 }
-
-
