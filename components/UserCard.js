@@ -1,8 +1,21 @@
 "use client";
 import Link from "next/link";
-import StarRating from "./StarRating";
 import { useDashboard } from "../context/DashboardContext";
-import { FaBookmark, FaRegBookmark, FaUserTie } from "react-icons/fa"; // Optional icons
+import StarRating from "./StarRating";
+
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Stack,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 export default function UserCard({ user }) {
   const {
@@ -16,50 +29,56 @@ export default function UserCard({ user }) {
   const isPromoted = promoted.includes(user.id);
 
   return (
-    <div className="border p-4 rounded shadow bg-white flex flex-col gap-2">
-      <h2 className="font-semibold text-lg text-black">
-        {user.firstName} {user.lastName}
-      </h2>
-      <p className="text-black">{user.email}</p>
-      <p className="text-black">Age: {user.age}</p>
-      <p className="text-sm text-gray-600">Dept: {user.department}</p>
-      <StarRating rating={user.performance} />
+    <Card variant="outlined" sx={{ mb: 2 }}>
+      <CardContent>
+        <Typography variant="h6" component="div" color="text.primary">
+          {user.firstName} {user.lastName}
+        </Typography>
 
-      <div className="mt-3 flex gap-4 items-center text-sm">
-        <Link
-          href={`/employee/${user.id}`}
-          className="text-blue-600 hover:underline font-medium"
-        >
-          View
-        </Link>
+        <Typography variant="body2" color="text.secondary">
+          {user.email}
+        </Typography>
 
-        <button
-          onClick={() => toggleBookmark(user.id)}
-          className="flex items-center gap-1 text-yellow-600 hover:underline"
-        >
-          {isBookmarked ? (
-            <>
-              <FaBookmark className="text-yellow-700" />
-              <span className="text-yellow-700">Bookmarked</span>
-            </>
-          ) : (
-            <>
-              <FaRegBookmark />
-              <span>Bookmark</span>
-            </>
-          )}
-        </button>
+        <Typography variant="body2" color="text.secondary">
+          Age: {user.age}
+        </Typography>
 
-        <button
-          onClick={() => promoteEmployee(user.id)}
-          className="flex items-center gap-1 text-green-600 hover:underline"
-        >
-          <FaUserTie className={isPromoted ? "text-green-700" : ""} />
-          <span className={isPromoted ? "text-green-700 font-medium" : ""}>
-            {isPromoted ? "Promoted" : "Promote"}
-          </span>
-        </button>
-      </div>
-    </div>
+        <Typography variant="body2" color="text.secondary">
+          Department: {user.department}
+        </Typography>
+
+        <StarRating rating={user.performance} />
+
+        <Stack direction="row" spacing={1} mt={2} alignItems="center">
+          <Link href={`/employee/${user.id}`} passHref legacyBehavior>
+            <Button
+              variant="outlined"
+              startIcon={<VisibilityIcon />}
+              size="small"
+            >
+              View
+            </Button>
+          </Link>
+
+          <Tooltip title={isBookmarked ? "Remove Bookmark" : "Bookmark"}>
+            <IconButton
+              color={isBookmarked ? "warning" : "default"}
+              onClick={() => toggleBookmark(user.id)}
+            >
+              {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title={isPromoted ? "Already Promoted" : "Promote"}>
+            <IconButton
+              color={isPromoted ? "success" : "default"}
+              onClick={() => promoteEmployee(user.id)}
+            >
+              <EmojiEventsIcon />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+      </CardContent>
+    </Card>
   );
 }
