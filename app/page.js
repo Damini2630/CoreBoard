@@ -27,7 +27,7 @@ export default function HomePage() {
     department: "",
     phone: "",
     address: "",
-    bio: "",
+    bio: "", // 👈 Add bio to state
   });
 
   const handleChange = (e) => {
@@ -45,7 +45,7 @@ export default function HomePage() {
       department: "",
       phone: "",
       address: "",
-      bio:"",
+      bio: "", // 👈 Reset bio too
     });
   };
 
@@ -63,7 +63,7 @@ export default function HomePage() {
         >
           HR Performance Dashboard
         </Typography>
-        <Button variant="contained" color="dark blue" onClick={() => setOpen(true)}>
+        <Button variant="contained" onClick={() => setOpen(true)}>
           + Add Employee
         </Button>
       </Box>
@@ -81,21 +81,41 @@ export default function HomePage() {
         <DialogTitle>Add New Employee</DialogTitle>
         <DialogContent dividers>
           <Grid container spacing={2} mt={1}>
-            {["firstName", "lastName", "email", "age", "department", "phone", "address", "bio"].map(
-              (field) => (
-                <Grid item xs={12} sm={field === "address" ? 12 : 6} key={field}>
-                  <TextField
-                    label={field.replace(/^\w/, (c) => c.toUpperCase())}
-                    name={field}
-                    value={form[field]}
-                    onChange={handleChange}
-                    fullWidth
-                    type={field === "age" ? "number" : "text"}
-                    required
-                  />
-                </Grid>
-              )
-            )}
+            {[
+              "firstName",
+              "lastName",
+              "email",
+              "age",
+              "department",
+              "phone",
+              "address",
+            ].map((field) => (
+              <Grid item xs={12} sm={field === "address" ? 12 : 6} key={field}>
+                <TextField
+                  label={field.replace(/^\w/, (c) => c.toUpperCase())}
+                  name={field}
+                  value={form[field]}
+                  onChange={handleChange}
+                  fullWidth
+                  type={field === "age" ? "number" : "text"}
+                  required
+                />
+              </Grid>
+            ))}
+
+            {/* Bio Field */}
+            <Grid item xs={12}>
+              <TextField
+                label="Bio"
+                name="bio"
+                value={form.bio}
+                onChange={handleChange}
+                fullWidth
+                multiline
+                rows={3}
+                placeholder="Tell us a little about the employee..."
+              />
+            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
