@@ -179,14 +179,14 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow h-96">
+      <div className="bg-white p-4 rounded shadow text-black h-96">
         <h2 className="text-xl font-semibold mb-2">Bookmark Distribution</h2>
         <div className="h-full">
           <Pie data={bookmarkChart} options={chartOptions} />
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow h-96">
+      <div className="bg-white p-4 rounded shadow text-black h-96">
         <h2 className="text-xl font-semibold mb-2">Promotion Distribution</h2>
         <div className="h-full">
           <Pie data={promotedChart} options={chartOptions} />
