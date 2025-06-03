@@ -1,8 +1,6 @@
-
 "use client";
 import { useDashboard } from "../context/DashboardContext";
 import React, { useState } from "react";
-
 import {
   Box,
   TextField,
@@ -32,17 +30,19 @@ export default function SearchFilter() {
   };
 
   return (
-    <Box my={3}>
-      <Stack spacing={3}>
+    <Box my={2} sx={{ overflowX: "auto" }}>
+      <Stack direction="row" spacing={4} alignItems="center" flexWrap="wrap">
+        {/* Search Input */}
         <TextField
-          fullWidth
-          label="Search by name, email, or department"
+          label="Search"
           variant="outlined"
           onChange={(e) => setSearch(e.target.value)}
+          sx={{ minWidth: 250 }}
         />
 
+        {/* Departments */}
         <Box>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom>
             Departments:
           </Typography>
           <ToggleButtonGroup
@@ -59,8 +59,9 @@ export default function SearchFilter() {
           </ToggleButtonGroup>
         </Box>
 
+        {/* Ratings */}
         <Box>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom>
             Ratings:
           </Typography>
           <ToggleButtonGroup
@@ -80,4 +81,3 @@ export default function SearchFilter() {
     </Box>
   );
 }
-
