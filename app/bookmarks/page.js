@@ -2,8 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import { useDashboard } from "../../context/DashboardContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // MUI Components
 import {
@@ -24,19 +22,11 @@ export default function BookmarksPage() {
     const confirmed = window.confirm(`Are you sure you want to promote ${name}?`);
     if (confirmed) {
       promoteEmployee(id);
-      toast.success(`${name} has been promoted!`, {
-        position: "top-right",
-        autoClose: 3000,
-      });
     }
   };
 
-  const handleUnbookmark = (id, name) => {
+  const handleUnbookmark = (id) => {
     toggleBookmark(id);
-    toast.info(`${name} removed from bookmarks.`, {
-      position: "top-right",
-      autoClose: 3000,
-    });
   };
 
   const bookmarkedUsers = users.filter((u) => bookmarks.includes(u.id));
@@ -53,7 +43,6 @@ export default function BookmarksPage() {
 
   return (
     <Box p={4}>
-      <ToastContainer />
       <Typography variant="h4" fontWeight="bold" gutterBottom color="text.primary">
         Bookmarked Employees
       </Typography>
@@ -82,7 +71,7 @@ export default function BookmarksPage() {
                   <Button
                     size="small"
                     color="error"
-                    onClick={() => handleUnbookmark(user.id, `${user.firstName} ${user.lastName}`)}
+                    onClick={() => handleUnbookmark(user.id)}
                   >
                     Remove Bookmark
                   </Button>
