@@ -11,7 +11,6 @@ A modern HR management dashboard built with **Next.js App Router**, **Tailwind C
 - 🟨 **JavaScript (ES6+)**
 - 📦 **State Management:** Context API
 - 📊 **Charts:** Chart.js
-- 🔐 **Authentication:** (Optional) NextAuth.js
 
 ---
 
